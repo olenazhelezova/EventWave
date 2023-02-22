@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>Edit event</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <nav class="border navbar navbar-expand-md navbar-dark" style="background-color: #A95C68;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="orders.html"></span><span>EventWave</span></span></a>
+                <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav me-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="orders.html">Orders</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="events.html">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="customers.html">Customers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <main class="container py-5">
+          <div class="row justify-content-center align-items-center mb-4">
+            <h1 class="col-auto">Edit the event</h1>
+            <div class="col-auto">
+              <a class="btn btn-outline-primary ms-5" href="events.html" role="button">Cancel</a>
+              <a class="btn btn-primary ms-3" href="events.html" role="button" type="submit">Save</a>
+            </div>
+          </div>
+          <form class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="mb-3 row">
+                <label for="name" class="col-sm-4 col-form-label">Name:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="name" name="name" value="The National" placeholder="Event name" minlength="3" maxlength="50" required>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="date" class="col-sm-4 col-form-label">Date:</label>
+                <div class="col-sm-8">
+                  <input type="date" class="form-control" id="date" name="date" value="2023-09-01" required>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="time" class="col-sm-4 col-form-label">Time:</label>
+                <div class="col-sm-8">
+                  <input type="time" class="form-control" id="time" name="time" value="20:00" required>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="city" class="col-sm-4 col-form-label">City:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="city" name="city" value="Liverpool" placeholder="City" minlength="3" maxlength="50" required>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="location" class="col-sm-4 col-form-label">Location:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="location" name="location" value="M&S Bank Arena" placeholder="Location" minlength="3" maxlength="50" required>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="avail" class="col-sm-4 col-form-label">Availability:</label>
+                <div class="col-sm-8">
+                  <input type="number" class="form-control" id="avail" name="avail" value="2800" min="1" placeholder="0" required>
+                </div>
+              </div>
+            </div>
+          </form>
+        </main>
+    </body>
+</html>
