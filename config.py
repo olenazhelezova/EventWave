@@ -8,3 +8,4 @@ database = os.environ.get('MYSQL_DATABASE')
 class Config():
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{user}:{password}@{server}/{database}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
