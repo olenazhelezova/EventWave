@@ -304,7 +304,7 @@ This mode has been developed to display and modify the list of customers.
 **Constraints for data validation:**
 - Name – should not be left blank and should be between 3 to 50 characters long;    
 - E-mail – should not be left blank and should follow the standard e-mail format, with a valid username, followed by the "@" symbol, and then the domain name. For example, <example123@gmail.com>. The allowable length of input is between 3 to 50 characters; 
-- Phone number - this field must not be left blank and must contain a valid phone number format. Input data can only contain numbers and the "+" symbol, with no spaces. The acceptable input length is from 7 to 20 characters.
+- Phone number - this field must not be left blank and must contain a valid phone number format. Input data can only contain numbers and the "+" symbol, with no spaces. The acceptable input length is from 10 to 12 characters.
     
 ### 3.3. Edit the customer.
 
