@@ -82,7 +82,7 @@ The mode has been created to enable the viewing and editing of the order list an
 - Quantity of tickets – should not be left blank and should be represented by a whole number. No decimal values or negative numbers are allowed. The maximum order quantity is 20 tickets;    
 - Cost of ticket – should not be left blank and should be represented as a decimal number with two decimal places. For example, "15.99";    
 - Order date – should not be left blank andshould be in the format "dd/mm/yyyy";    
-- E-mail – should not be left blank and should follow the standard e-mail format, with a valid username, followed by the "@" symbol, and then the domain name. For example, "example123@gmail.com". The allowable length of input is between 3 to 50 characters.
+- E-mail – should not be left blank and should follow the standard e-mail format, with a valid username, followed by the "@" symbol, and then the domain name. For example, "example123@gmail.com". The allowable length of input is between 6 to 50 characters.
     
 ### 1.3. Edit the order.
 

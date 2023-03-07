@@ -27,9 +27,9 @@ def seed_db():
 
     db.session.flush()
 
-    order_1 = Order(event_1.id, 200.00, 2, 400.00, date(2023, 2, 5), customer_1.id)
-    order_2 = Order(event_2.id, 150.00, 2, 150.00, date(2023, 2, 20), customer_2.id)
-    order_3 = Order(event_3.id, 180.00, 1, 180.00, date(2023, 2, 25), customer_3.id)
+    order_1 = Order(event_1.id, 200.00, 2, date(2023, 2, 5), customer_1.id)
+    order_2 = Order(event_2.id, 150.00, 2, date(2023, 2, 20), customer_2.id)
+    order_3 = Order(event_3.id, 180.00, 1, date(2023, 2, 25), customer_3.id)
 
     db.session.add(order_1)
     db.session.add(order_2)

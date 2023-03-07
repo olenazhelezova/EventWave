@@ -30,10 +30,16 @@ class Event(db.Model):
         db.Model.__init__(self, name=name, date=date, time=time,
         city=city, location=location, availability=availability)
 
-    def __repr__(self):
+    def to_dict(self):
         """
-        Returns string representation of the event
-        :return: string representation of the event
+        Return a dictionary from its fields
         """
-        return f"""<Event(name='{self.name}', date='{self.date}', time='{self.time}',
-        city='{self.city}', location='{self.location}', availability='{self.availability}')>"""
+        return {
+            'id':self.id,
+            'name': self.name,
+            'date': self.date,
+            'time': self.time,
+            'city': self.city,
+            'location': self.location,
+            'availability': self.availability
+            }
