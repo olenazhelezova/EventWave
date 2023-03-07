@@ -147,7 +147,7 @@ class TestEventService(TestCaseBase):
         db_session_mock.delete.assert_called_once_with(event_1)
         db_session_mock.commit.assert_called_once()
 
-    @patch("event_wave_app.models.customer.Customer.query")
+    @patch("event_wave_app.models.event.Event.query")
     def test_delete_event_failure(self, query_mock):
         query_mock.filter_by.return_value.first.return_value = None
         with self.assertRaises(ServiceException):
