@@ -1,6 +1,8 @@
 # EventWave
 
-![](./coverage.svg)
+[![Coverage Status](https://coveralls.io/repos/github/olenazhelezova/EventWave/badge.svg)](https://coveralls.io/github/olenazhelezova/EventWave)
+[![Build Status](https://app.travis-ci.com/olenazhelezova/EventWave.svg?branch=main)](https://app.travis-ci.com/olenazhelezova/EventWave)
+
 EventWave is an application that manages events, customers, and orders. It provides a platform for event organizers to create and manage their events, orders and information about customers. It uses RESTful web service to perform CRUD operations.
 
 ## With this app you can:
