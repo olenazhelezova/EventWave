@@ -5,13 +5,15 @@ import re
 from typing import List
 
 from event_wave_app import db
-from event_wave_app.models.order import Order
+from event_wave_app.models import Order
 from event_wave_app.service.customer_service import CustomerService
 from event_wave_app.service.event_service import EventService
 from .helpers import ServiceException, validate_date
 
+
 class OrderService:
     """A class that provides CRUD operations for orders."""
+
     @staticmethod
     def get_orders(from_date=None, to_date=None) -> List[Order]:
         """
@@ -81,7 +83,7 @@ class OrderService:
         order = Order.query.filter_by(id=order_id).first()
         if order is None:
             raise ServiceException("Order doesn't exist.")
-        if order.event_id != data["event_id"]:
+        if str(order.event_id) != str(data["event_id"]):
             raise ServiceException("You can not change event.")
         order.price = data["price"]
         order.qty = data["qty"]
@@ -121,10 +123,13 @@ class OrderService:
             raise ServiceException("Missing required fields.")
         if re.fullmatch(r"^\d+(\.\d{1,2})?$", str(data["price"])) is None:
             raise ServiceException("Invalid price format.")
-        if not isinstance(data["qty"], int) or data["qty"] < 0:
+        if re.fullmatch(r"^[0-9]*$", str(data["qty"])) is None:
             raise ServiceException("Invalid quantity.")
         validate_date(data["order_date"])
-        if EventService.get_event(event_id=data["event_id"]) is None:
+        event = EventService.get_event(event_id=data["event_id"])
+        if event is None:
             raise ServiceException("Event doesn't exist.")
+        if (event.availability - event.sold) < int(data["qty"]):
+            raise ServiceException("Not enough tickets.")
         if CustomerService.get_customer(customer_id=data["customer_id"]) is None:
             raise ServiceException("Customer doesn't exist.")

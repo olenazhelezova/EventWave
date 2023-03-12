@@ -17,13 +17,15 @@ from event_wave_app.rest.api_messages import (
     NOT_FOUND_ERROR_MESSAGE,
     APPLICATION_ERROR_MESSAGE,
     SUCCESS_DELETE_MESSAGE,
-    to_message)
+    to_message,
+)
 
 
 class SingleEventResource(Resource):
     """
     Resource for managing a single event, identified by its ID.
     """
+
     def get(self, event_id):
         """
         Retrieve a single event by ID.
@@ -79,12 +81,14 @@ class SingleEventResource(Resource):
         except Exception:
             return to_message(APPLICATION_ERROR_MESSAGE), 500
 
+
 class MultipleEventResource(Resource):
     """
     This resource defines the HTTP methods for retrieving multiple
     events or creating new event.
     """
-    def get(self, from_date = None, to_date = None):
+
+    def get(self, from_date=None, to_date=None):
         """
         Retrieve a list of events.
 
@@ -96,13 +100,13 @@ class MultipleEventResource(Resource):
             the list of customers.
         """
         try:
-            from_date = request.args.get('from_date')
-            to_date = request.args.get('to_date')
+            from_date = request.args.get("from_date")
+            to_date = request.args.get("to_date")
             if from_date or to_date:
                 events = EventService.get_events(from_date=from_date, to_date=to_date)
             else:
                 events = EventService.get_events()
-            return EventSchema().dump(events, many=True), 200
+            return EventSchema(exclude=["orders"]).dump(events, many=True), 200
         except ServiceException as error:
             return to_message(str(error)), 400
         except Exception:

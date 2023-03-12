@@ -4,12 +4,13 @@ This module consists of the CRUD operations to work with `events` table.
 import re
 from typing import List
 from event_wave_app import db
-from event_wave_app.models.event import Event
+from event_wave_app.models import Event
 from .helpers import ServiceException, validate_date
 
 
 class EventService:
     """A class that provides CRUD operations for events."""
+
     @staticmethod
     def get_events(from_date=None, to_date=None) -> List[Event]:
         """
@@ -101,6 +102,8 @@ class EventService:
         """
         event = Event.query.filter_by(id=event_id).first()
         if event:
+            if len(event.orders) > 0:
+                raise ServiceException("You can not delete this event.")
             db.session.delete(event)
             db.session.commit()
         else:
@@ -125,13 +128,13 @@ class EventService:
             raise ServiceException("Invalid name.")
         validate_date(data["date"])
         if (
-            re.fullmatch(r"^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$", str(data["time"]))
+            re.fullmatch(r"^([01]\d|2[0-3]):([0-5]\d(:00)?)$", str(data["time"]))
             is None
         ):
             raise ServiceException("Invalid time format.")
         if not 3 <= len(data["city"]) <= 50:
-            raise ServiceException("Invalide city name.")
+            raise ServiceException("Invalid city name.")
         if not 3 <= len(data["location"]) <= 50:
-            raise ServiceException("Invalide location.")
-        if not isinstance(data["availability"], int) or data["availability"] < 0:
+            raise ServiceException("Invalid location.")
+        if re.fullmatch(r"^[0-9]*$", str(data["availability"])) is None:
             raise ServiceException("Invalid availability.")

@@ -1,0 +1,55 @@
+<div class="modal fade" id="entity-data-modal" tabindex="-1" aria-labelledby="entity-data-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="entity-data-modal-label"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="row justify-content-center">
+                    <div class="mb-3 row">
+                      <label for="name" class="col-sm-4 col-form-label">Name:</label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="name" name="name" placeholder="Event name" minlength="3" maxlength="50" required>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="date" class="col-sm-4 col-form-label">Date:</label>
+                      <div class="col-sm-8">
+                        <input type="date" class="form-control" id="date" name="date" required>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="time" class="col-sm-4 col-form-label">Time:</label>
+                      <div class="col-sm-8">
+                        <input type="time" class="form-control" id="time" name="time" required>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="city" class="col-sm-4 col-form-label">City:</label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="city" name="city" placeholder="City" minlength="3" maxlength="50" required>
+                    </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="location" class="col-sm-4 col-form-label">Location:</label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="location" name="location" placeholder="Location" minlength="3" maxlength="50" required>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="avail" class="col-sm-4 col-form-label">Availability:</label>
+                      <div class="col-sm-8">
+                        <input type="number" class="form-control" id="availability" name="availability" min="1" placeholder="0" required>
+                      </div>
+                    </div>
+
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="save-entity-button">Save</button>
+        </div>
+    </div>
+    </div>
+</div>

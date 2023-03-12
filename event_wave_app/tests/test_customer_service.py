@@ -1,7 +1,7 @@
 from unittest.mock import patch
 from event_wave_app.service.customer_service import CustomerService
 from event_wave_app.models.customer import Customer
-from event_wave_app.tests.test_data import customer_1, customer_2, customer_3
+from event_wave_app.tests.test_data import customer_1, customer_2, customer_3, customer_4
 from event_wave_app.service.helpers import ServiceException
 from event_wave_app.tests.test_case_base import TestCaseBase
 
@@ -94,3 +94,9 @@ class TestCustomerService(TestCaseBase):
         query_mock.filter_by.return_value.first.return_value = None
         with self.assertRaises(ServiceException):
             CustomerService.delete_customer(666)
+
+    @patch("event_wave_app.models.customer.Customer.query")
+    def test_delete_customer_impossible_deletion(self, query_mock):
+        query_mock.filter_by.return_value.first.return_value = customer_4
+        with self.assertRaises(ServiceException):
+            CustomerService.delete_customer(customer_4.id)

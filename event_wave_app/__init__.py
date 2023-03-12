@@ -45,8 +45,11 @@ werkzeug_logger.addHandler(stdstream_handler)
 werkzeug_logger.setLevel(logging.DEBUG)
 
 # pylint: disable=wrong-import-position
-# import from submodule
 from .models import customer, event, order
 from .rest import init_api
+from . import views
 
 init_api()
+
+# pylint: disable=wrong-import-order
+from event_wave_app.seed.seed_db import seed_db

@@ -17,13 +17,16 @@ from event_wave_app.rest.api_messages import (
     NOT_FOUND_ERROR_MESSAGE,
     APPLICATION_ERROR_MESSAGE,
     SUCCESS_DELETE_MESSAGE,
-    to_message)
+    to_message,
+)
+
 
 class SingleCustomerResource(Resource):
     """
     This resource defines the HTTP methods for retrieving, updating, and deleting a
     single customer by customer ID.
     """
+
     def get(self, customer_id):
         """
         Retrieve a single customer by ID.
@@ -78,7 +81,7 @@ class SingleCustomerResource(Resource):
         """
         try:
             CustomerService.delete_customer(customer_id)
-            return SUCCESS_DELETE_MESSAGE, 200
+            return to_message(SUCCESS_DELETE_MESSAGE), 200
         except ServiceException as error:
             return to_message(str(error)), 400
         except Exception:
@@ -90,6 +93,7 @@ class MultipleCustomerResource(Resource):
     This resource defines the HTTP methods for retrieving multiple
     customers or creating new customer.
     """
+
     def get(self):
         """
         Retrieve a list of customers.

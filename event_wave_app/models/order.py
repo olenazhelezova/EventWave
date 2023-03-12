@@ -3,10 +3,7 @@ Order model used to represent ticket orders
 """
 # pylint: disable=cyclic-import
 from sqlalchemy import Column, Integer, Date, ForeignKey, FLOAT
-from event_wave_app.models.customer import Customer
-from event_wave_app.models.event import Event
 from event_wave_app import db
-
 
 class Order(db.Model):
     """
@@ -28,8 +25,8 @@ class Order(db.Model):
     order_date = Column(Date, nullable=False)
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
 
-    event = db.relationship(Event, backref=db.backref("orders", lazy=True))
-    customer = db.relationship(Customer)
+    event = db.relationship("Event", back_populates="orders")
+    customer = db.relationship("Customer", back_populates="orders")
 
     # pylint: disable=too-many-arguments
     def __init__(self, event_id, price, qty, order_date, customer_id):

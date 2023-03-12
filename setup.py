@@ -11,7 +11,6 @@ setup(
         'Flask==2.2.3',
         'Flask-RESTful==0.3.9',
         'Flask-SQLAlchemy==2.5.1'
-        'Flask-Migrate==4.0.4'
     ],
     include_package_data = True,
     packages = find_packages(),

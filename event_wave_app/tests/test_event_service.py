@@ -1,7 +1,7 @@
 from unittest.mock import patch
 from event_wave_app.service.event_service import EventService
 from event_wave_app.models.event import Event
-from event_wave_app.tests.test_data import event_1, event_2, event_3
+from event_wave_app.tests.test_data import event_1, event_2, event_3, event_4
 from event_wave_app.tests.test_case_base import TestCaseBase
 from event_wave_app.service.helpers import ServiceException
 
@@ -55,7 +55,7 @@ class TestEventService(TestCaseBase):
                 {
                     "name": "T",
                     "date": "2023-32-10",
-                    "time": "25:00:00",
+                    "time": "25:00",
                     "city": "La",
                     "location": "Ba",
                     "availability": "-3",
@@ -66,7 +66,7 @@ class TestEventService(TestCaseBase):
                 {
                     "name": "The National",
                     "date": "2023-13-32",
-                    "time": "25:00:00",
+                    "time": "25:00",
                     "city": "La",
                     "location": "Ba",
                     "availability": "-3",
@@ -77,7 +77,7 @@ class TestEventService(TestCaseBase):
                 {
                     "name": "The National",
                     "date": "2023-10-01",
-                    "time": "25:00:00",
+                    "time": "25:00",
                     "city": "La",
                     "location": "Ba",
                     "availability": "-3",
@@ -88,7 +88,7 @@ class TestEventService(TestCaseBase):
                 {
                     "name": "The National",
                     "date": "2023-10-01",
-                    "time": "19:00:00",
+                    "time": "19:00",
                     "city": "La",
                     "location": "Ba",
                     "availability": "-3",
@@ -99,7 +99,7 @@ class TestEventService(TestCaseBase):
                 {
                     "name": "The National",
                     "date": "2023-10-01",
-                    "time": "19:00:00",
+                    "time": "19:00",
                     "city": "Liverpool",
                     "location": "Ba",
                     "availability": "-3",
@@ -110,7 +110,7 @@ class TestEventService(TestCaseBase):
                 {
                     "name": "The National",
                     "date": "2023-10-01",
-                    "time": "19:00:00",
+                    "time": "19:00",
                     "city": "Liverpool",
                     "location": "M&S Bank Arena",
                     "availability": "-3",
@@ -152,3 +152,9 @@ class TestEventService(TestCaseBase):
         query_mock.filter_by.return_value.first.return_value = None
         with self.assertRaises(ServiceException):
             EventService.delete_event(666)
+
+    @patch("event_wave_app.models.event.Event.query")
+    def test_delete_event_impossible_deletion(self, query_mock):
+        query_mock.filter_by.return_value.first.return_value = event_4
+        with self.assertRaises(ServiceException):
+            EventService.delete_event(event_4.id)

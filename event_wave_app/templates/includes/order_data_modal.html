@@ -1,0 +1,83 @@
+<div class="modal fade" id="entity-data-modal" tabindex="-1" aria-labelledby="entity-data-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="entity-data-modal-label"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="row justify-content-center">
+                <div class="mb-3 row">
+                <label for="event_date" class="col-sm-4 col-form-label">Event Date:</label>
+                <div class="col-sm-8">
+                    <input type="date" class="form-control" id="event_date" name="event_date" required>
+                </div>
+                </div>
+                <div class="mb-3 row">
+                <label for="event" class="col-sm-4 col-form-label">Event:</label>
+                <div class="col-sm-8">
+                    <select class="form-select" id="event_id" name="event_id" required>
+
+                    </select>
+                </div>
+                </div>
+                <script type="application/javascript">
+                    document.getElementById('event_date').addEventListener('change', (event) => {
+                        event.preventDefault();
+                        document.getElementById('event_id').replaceChildren();
+                        selectedDate = event.currentTarget.value;
+                        fetch(`/api/events?from_date=${selectedDate}&to_date=${selectedDate}`)
+                            .then((response) => response.json())
+                            .then((data) => {
+                                
+                                if (data.message) {
+                                    alert(data.message);
+                                }
+
+                                for (event of data) {
+                                    let eventOption = document.createElement('option');
+                                    eventOption.value = event.id
+                                    eventOption.innerText = event.name + " " + event.time
+                                    document.getElementById('event_id').appendChild(eventOption);
+                                    document.getElementById('event_id').readOnly = false;
+                                }
+                            })
+                    })
+                </script>
+                <div class="mb-3 row">
+                <label for="price" class="col-sm-4 col-form-label">Price:</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="price" name="price" min="0.00" pattern="\d+(\.\d{2})?" placeholder="0.00" required>
+                </div>
+                </div>
+                <div class="mb-3 row">
+                <label for="qty" class="col-sm-4 col-form-label">Quantity:</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="qty" name="qty" min="1" max="20" placeholder="0" required>
+                </div>
+                </div>
+                <div class="mb-3 row">
+                <label for="order_date" class="col-sm-4 col-form-label">Order Date:</label>
+                <div class="col-sm-8">
+                    <input type="date" class="form-control" id="order_date" name="order_date" required readonly>          
+                </div>
+                </div>
+                <div class="mb-3 row">
+                <label for="email" class="col-sm-4 col-form-label">Customer:</label>
+                <div class="col-sm-8">
+                    <select class="form-select select" id="customer=id" name="customer_id">
+                    {% for customer in customers %}
+                        <option value="{{customer.id}}">{{customer.email}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="save-entity-button">Save</button>
+        </div>
+    </div>
+    </div>
+</div>

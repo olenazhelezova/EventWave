@@ -5,6 +5,7 @@ Customer model used to represent customers
 from sqlalchemy import Column, Integer, String
 from event_wave_app import db
 
+
 class Customer(db.Model):
     """
     Model representing customer
@@ -20,8 +21,14 @@ class Customer(db.Model):
     phone_number = Column(String(20), unique=True, nullable=False)
     email = Column(String(50), unique=True, nullable=False)
 
-    def __init__(self, name, phone_number, email):
-        db.Model.__init__(self, name=name, phone_number=phone_number, email=email)
+    orders = db.relationship("Order", back_populates="customer")
+
+    def __init__(self, name, phone_number, email, orders=None):
+        if orders is None:
+            orders = []
+        db.Model.__init__(
+            self, name=name, phone_number=phone_number, email=email, orders=orders
+        )
 
     def to_dict(self):
         """

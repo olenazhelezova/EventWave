@@ -4,15 +4,16 @@ This module consists of the CRUD operations to work with `customers` table.
 import re
 from typing import List
 from event_wave_app import db
-from event_wave_app.models.customer import Customer
+from event_wave_app.models import Customer
 from .helpers import ServiceException
 
 
 class CustomerService:
     """A class that provides CRUD operations for customers."""
+
     @staticmethod
     def get_customers() -> List[Customer]:
-        """       
+        """
         Retrieve a list of customers.
 
         :return: List of Customer objects.
@@ -78,6 +79,8 @@ class CustomerService:
         """
         customer = Customer.query.filter_by(id=customer_id).first()
         if customer:
+            if len(customer.orders) > 0:
+                raise ServiceException("You can not delete this customer.")
             db.session.delete(customer)
             db.session.commit()
         else:
@@ -97,7 +100,9 @@ class CustomerService:
             raise ServiceException("Invalid name.")
         if re.fullmatch(r"^\+\d{10,12}$", data["phone_number"]) is None:
             raise ServiceException("Invalid phone number.")
-        if re.fullmatch(
-            r"^[\w\.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", data["email"]
-        ) is None or not 6 <= len(data["email"]) <= 50:
+        if (
+            re.fullmatch(r"^[\w\.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", data["email"])
+            is None
+            or not 6 <= len(data["email"]) <= 50
+        ):
             raise ServiceException("Invalid e-mail adress.")

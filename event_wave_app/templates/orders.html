@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Orders
+{% endblock %}
+{% block script %}
+    <script src="static/js/order.js"></script>
+{% endblock %}
+
+
+{% block main %}
+          <div class="row mb-3">
+            <div class="col-6">
+              <h3>Ticket orders</h3>
+            </div>
+            <div class="col-6 text-end">
+              <a class="btn btn-outline-primary" role="button" onclick="addEntry()">Add order</a>
+            </div>
+          </div>
+    
+          {% include "includes/date_filter.html" %}
+    
+          <div class="row">
+            <div class="col">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Name and date</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total price</th>
+                    <th>Order date</th>
+                    <th>Customer's e-mail</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+          </div>
+          <script type="application/javascript">
+            loadGrid()
+          </script>
+          {% include "includes/confirmation_modal_dialog.html" %}
+          {% with customers=customers %}
+            {% include "includes/order_data_modal.html" %}
+          {% endwith %}
+{% endblock %} 

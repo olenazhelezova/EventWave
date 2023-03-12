@@ -9,6 +9,7 @@ script:
   - pylint event_wave_app
   - coverage run -m unittest discover event_wave_app/tests
   - coverage report
+  - coverage-badge -o coverage.svg
 
 after_success:
   - coveralls
