@@ -14,7 +14,7 @@ EventWave is an application that manages events, customers, and orders. It provi
 
 ## Getting started
 
-Before you start using the application, please ensure that you have Python 3.9 installed on your system.
+Before you start using the application, please ensure that you have Python 3.9 and MySQL 8 installed on your system. In MySQL have user and database. User must have full access to database.
 
 ## How to build this project:
 
@@ -23,12 +23,16 @@ Before you start using the application, please ensure that you have Python 3.9 i
 ```
 git clone https://github.com/olenazhelezova/EventWave.git
 ```
+### Change directory:
+```
+cd EventWave
+```
 
 ### Create the virtual environment in project:
 
 ```
 virtualenv venv
-source env/bin/activate
+source venv/bin/activate
 ```
 
 ### Install project requirements:
@@ -40,32 +44,33 @@ pip install -r requirements.txt
 ### Configure MySQL database
 
 #### Set the following environment variables:
-
 ```
-MYSQL_USER=<your_mysql_user>
-MYSQL_PASSWORD=<your_mysql_user_password>
-MYSQL_SERVER=<your_mysql_server>
-MYSQL_DATABASE=<your_mysql_database_name>
+export MYSQL_USER=<your_mysql_user>
+export MYSQL_PASSWORD=<your_mysql_user_password>
+export MYSQL_SERVER=<your_mysql_server>
+export MYSQL_DATABASE=<your_mysql_database_name>
 ```
 
 _You can set these in .env file as the project uses dotenv module to load
 environment variables_
 
 #### Run migrations to create database infrastructure:
-
-- `flask db init`
+- `flask db stamp head`
 - `flask db migrate`
-- `flask db update`
-
+- `flask db upgrade`
 #### Optionally populate the database with sample data:
 
 ```
 flask db_seed
 ```
+### Start server:
+`flask run`
+or
+`gunicorn --bind :5000 event_wave_app:app`
 
-## Now you should be able to access the web service and web application on the following addresses:
+### Now you should be able to access the web service and web application on the following addresses:
 
-### Web Service:
+#### Web Service:
 
 ```
 localhost:5000/api/events
@@ -82,7 +87,7 @@ localhost:5000/api/customers
 localhost:5000/api/customers/<id>
 ```
 
-### Web Application:
+#### Web Application:
 
 ```
 localhost:5000/
